@@ -9,6 +9,31 @@ const chatStatus = get(".chatStatus");
 const typing = get(".typing");
 
 const chatId = window.location.pathname.substr(6);
+let authUser;
+
+window.onload = function (){
+    axios.get('/auth/user')
+        .then(res => {
+            authUser = res.data.authUser;
+        }).then(() => {
+        axios.get(`/chat/${chatId}/get_users`)
+            .then(res => {
+
+                let result = res.data.users.filter( user => user.id != authUser.id);
+                if (result.length > 0){
+                    chatWith.innerHTML = result[0].name;
+                }
+            }).then(() => {
+                axios.get(`/chat/${chatId}/get_messages`)
+                    .then(res => {
+                        console.log('entre')
+                        appendMessages(res.data.messages);
+                    }).catch(err => {
+                    console.log(err)
+                })
+            })
+    })
+};
 
 msgerForm.addEventListener("submit", event => {
 
@@ -40,6 +65,15 @@ msgerForm.addEventListener("submit", event => {
 
 });
 
+function appendMessages(messages){
+    let side = 'left';
+    messages.forEach(message => {
+        side = (message.user_id == authUser.id) ? 'right' : 'left';
+
+        appendMessage(message.user.name, PERSON_IMG, side, message.content, formatDate(new Date(message.created_at)))
+    })
+}
+
 function appendMessage(name, img, side, text, date) {
     //   Simple solution for small apps
     const msgHTML = `
@@ -58,13 +92,24 @@ function appendMessage(name, img, side, text, date) {
       `;
 
     msgerChat.insertAdjacentHTML("beforeend", msgHTML);
-    msgerChat.scrollTop += 500;
+    // msgerChat.scrollTop += 500;
+    scrollToBottom ();
+}
+
+function scrollToBottom(){
+    msgerChat.scrollTop = msgerChat.scrollHeight;
 }
 
 //ECHO
 Echo.join(`chat.${chatId}`)
     .listen('MessageSent', (e) => {
-    console.log(e);
+        appendMessage(
+            e.message.user.name,
+            PERSON_IMG,
+            'left',
+            e.message.content,
+            formatDate(new Date(e.message.created_at)),
+        )
 });
 
 // Utils

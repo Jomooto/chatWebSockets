@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\message as Message;
+use App\Models\Message;
 class chat extends Model
 {
     use HasFactory;

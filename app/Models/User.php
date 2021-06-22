@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Message;
+use App\Models\Chat;
 
 class User extends Authenticatable
 {
@@ -42,10 +44,10 @@ class User extends Authenticatable
     ];
 
     public function chats(){
-        return $this->belongsToMany('\App\Models\Chat');
+        return $this->belongsToMany(Chat::class);
     }
 
     public function messages(){
-        return $this->hasMany('\App\Models\Message');
+        return $this->hasMany(Message::class);
     }
 }

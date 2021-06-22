@@ -7,6 +7,11 @@ use App\Events\MessageSent;
 
 class MessageController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
+
     public function sent(Request $request){
 
         $message = auth()->user()->messages()->create([

@@ -43,4 +43,23 @@ class chatController extends Controller
            'chat' => $chat
        ]);
    }
+
+   public function getUSers(Chat $chat){
+
+       $users = $chat->users;
+
+       return response()->json([
+          'users' => $users
+       ]);
+   }
+
+   public function getMessages (Chat $chat){
+
+       $messages = $chat->messages()->with('user')->get();
+
+       return response()->json([
+           'messages' => $messages
+       ]);
+   }
+
 }
