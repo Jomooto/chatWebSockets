@@ -8,6 +8,8 @@ use App\Models\Chat;
 
 class message extends Model
 {
+    protected $guarded = [];
+    
     use HasFactory;
 
     protected $fillable = [

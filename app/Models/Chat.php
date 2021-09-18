@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Message;
 class chat extends Model
 {
+    protected $guarded = [];
+    
     use HasFactory;
 
     public function users(){
