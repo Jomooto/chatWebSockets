@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Providers\RouteServiceProvider;
+use App\Http\Requests\Auth\LoginRequest;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -31,6 +32,13 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        //generate a loop to not run php artisan websockets:serve
+        Route::group(['prefix' => 'internal', 'middleware' => ['jwt.verify','admin']], function(){
+                Route::get('sockets/serve', function(){
+                    \Illuminate\Support\Facades\Artisan::call('websockets:serve');
+                });
+            });
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }

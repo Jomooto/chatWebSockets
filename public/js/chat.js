@@ -28,7 +28,7 @@ window.onload = function (){
             .then(() => {
                 axios.get(`/chat/${chatId}/get_messages`)
                     .then(res => {
-                        console.log('entre')
+                        // console.log('entre')
                         appendMessages(res.data.messages);
                     }).catch(err => {
                     console.log(err)
