@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\chatController;
 use App\Http\Controllers\MessageController;
@@ -15,6 +17,11 @@ use App\Http\Controllers\MessageController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+if (App::environment('production')) {
+    URL::forceScheme('https');
+}
+
+
 
 Route::get('/', function () {
     return view('welcome');
