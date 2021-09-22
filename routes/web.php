@@ -1,9 +1,11 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\chatController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\MessageController;
 
 
@@ -46,6 +48,8 @@ Route::get('chat/with/{user}', [chatController::class, 'chatWith'] )->name('chat
 
 Route::get('chat/{chat}', [chatController::class, 'show'])->name('chat.show');
 
+// Route::get('users', [UsersController::class, 'getUsers'])->name('users.getUsers')->middleware(['auth'])->name('dashboard');
+
 
 
 
@@ -53,7 +57,8 @@ Route::post('message/sent', [MessageController::class, 'sent'])->name('message.s
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $Users = User::get();
+    return view('dashboard', compact('Users'));
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -13,6 +14,15 @@
 <body>
 <section class="msger">
     <header class="msger-header">
+
+
+    <ul class="flex">
+        <li class="flex-1 mr-2">
+            <a class="text-center block border border-blue-500 rounded py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white" href="/dashboard">Back</a>
+        </li>
+    </ul>
+
+
         <div class="msger-header-title">
             <i class="fas fa-comment-alt"></i>
             <span class="chatWith"></span>
@@ -38,3 +48,4 @@
 
 </body>
 </html>
+
