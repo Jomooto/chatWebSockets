@@ -19,6 +19,7 @@ use App\Http\Controllers\MessageController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 if (App::environment('production')) {
     URL::forceScheme('https');
 }
