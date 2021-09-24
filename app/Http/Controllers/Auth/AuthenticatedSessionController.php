@@ -31,24 +31,7 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
-<<<<<<< HEAD
         $request->session()->regenerate();
-
-        //generate a loop to not run php artisan websockets:serve
-<<<<<<< HEAD
-     
-=======
-        $request->session()->regenerate();     
->>>>>>> bcb6fa6b947b3b0f85fe0fd1a6ccb0c5ce7f8495
-
-=======
-/**        Route::group(['prefix' => 'internal', 'middleware' => ['jwt.verify','admin']], function(){
-                Route::get('sockets/serve', function(){
-                    \Illuminate\Support\Facades\Artisan::call('websockets:serve');
-                });
-            });
-*/
->>>>>>> 2117950115c8ac985a3b2850b2869c348d364f43
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
