@@ -31,11 +31,15 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+<<<<<<< HEAD
         $request->session()->regenerate();
 
         //generate a loop to not run php artisan websockets:serve
 <<<<<<< HEAD
      
+=======
+        $request->session()->regenerate();     
+>>>>>>> bcb6fa6b947b3b0f85fe0fd1a6ccb0c5ce7f8495
 
 =======
 /**        Route::group(['prefix' => 'internal', 'middleware' => ['jwt.verify','admin']], function(){
