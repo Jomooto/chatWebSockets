@@ -39,27 +39,31 @@ Route::get('auth/user', function (){
     }
 });
 
-Route::get('chat/{chat}/get_users', [chatController::class, 'getUsers'])->name('chat.getUsers');
-
-Route::get('chat/{chat}/get_messages', [chatController::class,'getMessages'])->name('chat.getMessages');
-//Route::get('chat/{chat}/get_messages', 'App\Http\Controllers\chatController@getMessages')->name('chat.getMessages');
-
-Route::get('chat/with/{user}', [chatController::class, 'chatWith'] )->name('chat.with');
-
-Route::get('chat/{chat}', [chatController::class, 'show'])->name('chat.show');
-
-// Route::get('users', [UsersController::class, 'getUsers'])->name('users.getUsers')->middleware(['auth'])->name('dashboard');
 
 
+    Route::get('chat/{chat}/get_users', [chatController::class, 'getUsers'])->name('chat.getUsers');
+
+    Route::get('chat/{chat}/get_messages', [chatController::class,'getMessages'])->name('chat.getMessages');
+    //Route::get('chat/{chat}/get_messages', 'App\Http\Controllers\chatController@getMessages')->name('chat.getMessages');
+
+    Route::get('chat/with/{user}', [chatController::class, 'chatWith'] )->name('chat.with');
+
+    Route::get('chat/{chat}', [chatController::class, 'show'])->name('chat.show');
+
+    // Route::get('users', [UsersController::class, 'getUsers'])->name('users.getUsers')->middleware(['auth'])->name('dashboard');
 
 
-Route::post('message/sent', [MessageController::class, 'sent'])->name('message.sent');
+
+
+    Route::post('message/sent', [MessageController::class, 'sent'])->name('message.sent');
 
 
 Route::get('/dashboard', function () {
     $Users = User::get();
     return view('dashboard', compact('Users'));
 })->middleware(['auth'])->name('dashboard');
+
+
 
 require __DIR__.'/auth.php';
 
