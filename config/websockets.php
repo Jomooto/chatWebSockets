@@ -48,7 +48,7 @@ return [
      * Leave this empty if you want to accept requests from all hosts.
      */
     'allowed_origins' => [
-        //
+        'chatwebsockettest.xyz'
     ],
 
     /*
@@ -116,26 +116,56 @@ return [
          * certificate chain of issuers. The private key also may be contained
          * in a separate file specified by local_pk.
          */
-        'local_cert' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_CERT', null),
+       // 'local_cert' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_CERT', null),
 
         /*
          * Path to local private key file on filesystem in case of separate files for
          * certificate (local_cert) and private key.
          */
-        'local_pk' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_PK', null),
+        //'local_pk' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_PK', null),
 
         /*
          * Passphrase for your local_cert file.
          */
-        'passphrase' => env('LARAVEL_WEBSOCKETS_SSL_PASSPHRASE', null),
-    ],
+        //'passphrase' => env('LARAVEL_WEBSOCKETS_SSL_PASSPHRASE', null),
 
-    /*
-     * Channel Manager
-     * This class handles how channel persistence is handled.
-     * By default, persistence is stored in an array by the running webserver.
-     * The only requirement is that the class should implement
-     * `ChannelManager` interface provided by this package.
-     */
-    'channel_manager' => \BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManagers\ArrayChannelManager::class,
+	 //'local_cert' => env('SSL_CERT', null),
+    	//'local_pk' => env('SSL_PK', null),
+    	//'passphrase' => env('JWT_SECRET', null),
+    	//'verify_peer' => false,
+
+		 /*
+	     * Path to local certificate file on filesystem. It must be a PEM encoded file which
+	     * contains your certificate and private key. It can optionally contain the
+	     * certificate chain of issuers. The private key also may be contained
+	     * in a separate file specified by local_pk.
+	     */
+	    //'local_cert' => null,
+	    'local_cert' => '/var/www/sockettest/fullchain.pem',
+
+	    /*
+	     * Path to local private key file on filesystem in case of separate files for
+	     * certificate (local_cert) and private key.
+	     */
+	    //'local_pk' => null,
+	    'local_pk' => '/var/www/sockettest/privkey.pem',
+
+	    /*
+	     * Passphrase for your local_cert file.
+	     */
+	    //'passphrase' => null,
+	    'passphrase' => env('LARAVEL_WEBSOCKETS_SSL_PASSPHRASE', null),
+	    'verify_peer' => false,
+
+
+	    ],
+
+	    /*
+	     * Channel Manager
+	     * This class handles how channel persistence is handled.
+	     * By default, persistence is stored in an array by the running webserver.
+	     * The only requirement is that the class should implement
+    	 * `ChannelManager` interface provided by this package.
+     	*/
+    	'channel_manager' => \BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManagers\ArrayChannelManager::class,
 ];
